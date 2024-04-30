@@ -1,0 +1,43 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class NoteService {
+  static final FirebaseFirestore _database = FirebaseFirestore.instance;
+  static final CollectionReference _notesCollection =
+      _database.collection('notes');
+
+  static Future<void> addNote(String title, String description) async {
+    Map<String, dynamic> newNote = {
+      'title': title,
+      'description': description,
+    };
+
+    await _notesCollection.add(newNote);
+  }
+
+  static Future<void> updateNote(
+      String id, String title, String description) async {
+    Map<String, dynamic> updateNote = {
+      'title': title,
+      'description': description,
+    };
+
+    await _notesCollection.doc(id).update(updateNote);
+  }
+
+  static Future<void> deleteNote(String id) async {
+    await _notesCollection.doc(id).delete();
+  }
+
+  static Future<QuerySnapshot> retrieveNotes() {
+    return _notesCollection.get();
+  }
+
+  static Stream<List<Map<String, dynamic>>> getNoteList() {
+    return _notesCollection.snapshots().map((querySnapshot) {
+      return querySnapshot.docs.map((docSnapShot) {
+        final data = docSnapShot.data() as Map<String, dynamic>;
+        return {'id': docSnapShot.id, ...data};
+      }).toList();
+    });
+  }
+}
