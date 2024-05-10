@@ -42,13 +42,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyDj8b9iEtiskM_iQ-UF9J6Ow-aQjqob1IM',
-    appId: '1:629634382533:web:0dac1960f04f485c620eac',
+    appId: '1:629634382533:web:758f68b433a295cf620eac',
     messagingSenderId: '629634382533',
     projectId: 'notes-31b04',
     authDomain: 'notes-31b04.firebaseapp.com',
     databaseURL: 'https://notes-31b04-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'notes-31b04.appspot.com',
-    measurementId: 'G-W8FH2EFYRL',
+    measurementId: 'G-NE1J1FVZXC',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -82,13 +82,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions windows = FirebaseOptions(
     apiKey: 'AIzaSyDj8b9iEtiskM_iQ-UF9J6Ow-aQjqob1IM',
-    appId: '1:629634382533:web:0dac1960f04f485c620eac',
+    appId: '1:629634382533:web:d97cc3176ed3798a620eac',
     messagingSenderId: '629634382533',
     projectId: 'notes-31b04',
     authDomain: 'notes-31b04.firebaseapp.com',
     databaseURL: 'https://notes-31b04-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'notes-31b04.appspot.com',
-    measurementId: 'G-W8FH2EFYRL',
+    measurementId: 'G-559T8V71B1',
   );
 
 }
