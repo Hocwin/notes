@@ -3,16 +3,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Note {
   String? id;
   final String title;
-  String? imageUrl;
   final String description;
+  String? imageUrl;
+  double? latitude;
+  double? longitude;
   Timestamp? createdAt;
   Timestamp? updatedAt;
 
   Note({
     this.id,
     required this.title,
-    this.imageUrl,
     required this.description,
+    this.imageUrl,
+    this.latitude,
+    this.longitude,
     this.createdAt,
     this.updatedAt,
   });
@@ -23,7 +27,9 @@ class Note {
       id: doc.id,
       title: data['title'],
       description: data['description'],
-      imageUrl: data['imageUrl'],
+      imageUrl: data['image_url'],
+      latitude: data['latitude'] as double,
+      longitude: data['longitude'] as double,
       createdAt: data['created_at'] as Timestamp,
       updatedAt: data['updated_at'] as Timestamp,
     );
@@ -33,7 +39,9 @@ class Note {
     return {
       'title': title,
       'description': description,
-      'imageUrl' : imageUrl,
+      'image_url': imageUrl,
+      'latitude': latitude,
+      'longitude': longitude,
       'created_at': createdAt,
       'updated_at': updatedAt,
     };
