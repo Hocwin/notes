@@ -20,7 +20,7 @@ class _NoteDialogState extends State<NoteDialog> {
   final TextEditingController _descriptionController = TextEditingController();
   File? _imageFile;
   Position? _currentPosition;
-  // String? _currentAddress;
+   String? _currentAddress;
 
   @override
   void initState() {
