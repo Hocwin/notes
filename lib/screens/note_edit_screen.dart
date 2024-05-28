@@ -21,9 +21,9 @@ class NoteEditScreen extends StatefulWidget {
 class _NoteEditScreenState extends State<NoteEditScreen> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  XFile? _imageFile;
   double? _latitude;
   double? _longitude;
-  XFile? _imageFile;
   Position? _currentPosition;
 
   @override
@@ -40,7 +40,6 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
   Future<void> _pickImage() async {
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
-
     if (pickedFile != null) {
       setState(() {
         _imageFile = pickedFile;
@@ -50,10 +49,12 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
 
   Future<void> _pickLocation() async {
     final currentPosition = await LocationService.getCurrentPosition();
+    // final currentAddress = await LocationService.getAddressFromLatLng(_currentPosition!);
     setState(() {
       _currentPosition = currentPosition;
       _latitude = currentPosition?.latitude;
       _longitude = currentPosition?.longitude;
+      // _currentAddress = currentAddress;
     });
   }
 
@@ -97,18 +98,14 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
                               imageUrl: _imageFile!.path,
                               fit: BoxFit.cover,
                               placeholder: (context, url) => const Center(
-                                child: CircularProgressIndicator(),
-                              ),
+                                  child: CircularProgressIndicator()),
                               errorWidget: (context, url, error) =>
-                                  const Center(
-                                child: Icon(Icons.error),
-                              ),
+                                  const Center(child: Icon(Icons.error)),
                             )
                           : Image.file(
                               File(_imageFile!.path),
                               fit: BoxFit.cover,
-                            ),
-                    )
+                            ))
                   : (widget.note?.imageUrl != null &&
                           Uri.parse(widget.note!.imageUrl!).isAbsolute
                       ? AspectRatio(
@@ -138,7 +135,7 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
                 textAlign: TextAlign.start,
               ),
               const SizedBox(
-                height: 32.0,
+                height: 32,
               ),
               Row(
                 children: [
@@ -155,8 +152,7 @@ class _NoteEditScreenState extends State<NoteEditScreen> {
                     onPressed: () async {
                       String? imageUrl;
                       if (_imageFile != null) {
-                        imageUrl =
-                            await NoteService.uploadImage(_imageFile! as XFile);
+                        imageUrl = await NoteService.uploadImage(_imageFile!);
                       } else {
                         imageUrl = widget.note?.imageUrl;
                       }

@@ -113,18 +113,17 @@ class NoteList extends StatelessWidget {
                                 onPressed: document.latitude != null &&
                                         document.longitude != null
                                     ? () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    GoogleMapsScreen(
+                                                        latitude:
+                                                            document.latitude!,
+                                                        longitude: document
+                                                            .longitude!)));
                                         // _launchMaps(document.latitude!,
                                         //     document.longitude!);
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                GoogleMapsScreen(
-                                              latitude: document.latitude!,
-                                              longitude: document.longitude!,
-                                            ),
-                                          ),
-                                        );
                                       }
                                     : null, // Disable the button if latitude or longitude is null
                               ),
